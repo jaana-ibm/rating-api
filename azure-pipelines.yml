@@ -24,4 +24,4 @@ stages:
       displayName: Build an image
       inputs:
         openshiftService: "My Openshift"
-        cmd: 'oc start-build --follow'
+        cmd: 'oc start-build rating-api --follow'
