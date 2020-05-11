@@ -5,23 +5,12 @@
 trigger:
 - master
 
-resources:
-- repo: self
+pool:
+  vmImage: 'ubuntu-latest'
 
-variables:
-  tag: '$(Build.BuildId)'
-
-stages:
-- stage: Build
-  displayName: Build image
-  jobs:  
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - task: oc-cmd@2
-      displayName: Build an image
-      inputs:
-        openshiftService: "My Openshift"
-        cmd: 'oc start-build testing --follow'
+steps:
+- task: oc-cmd@2
+  displayName: Push an image
+  inputs:
+    openshiftService: "My Openshift"
+    cmd: 'oc start-build rating-api --follow -n testing'
