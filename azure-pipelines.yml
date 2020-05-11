@@ -20,10 +20,8 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - task: Docker@2
+    - task: oc-cmd@2
       displayName: Build an image
       inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-        tags: |
-          $(tag)
+        openshiftService: "My Openshift"
+        cmd:'oc start-build raiting-api --follow'
